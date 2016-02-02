@@ -5,7 +5,6 @@ import urllib, urllib2
 import time
 import os
 
-
 app = Main()
 
 def deletePYCFiles():
@@ -32,22 +31,23 @@ class App():
         self.stderr_path = '/dev/tty'
         self.pidfile_path =  '/tmp/foo.pid'
         self.pidfile_timeout = 5
+        
     def run(self):
         while True:
-		    new_events = app.parse()
-		
-		    if len(new_events) > 0:
-		        body = "The following hackathons have been recently posted:<br><br><ul>"
-		        for event in new_events:
-		            body = body + "<li><a href='" + event[3] + "'><b>" + event[0] + "</b></a> in " + event[2] + " on " + event[1] + "</li>"
-		        body = body + "</ul>"
-		
-		        sendEmail(body)
-		    # else:
-		        # print("Everything is Up to Date")
-		    
-		    deletePYCFiles()
-		    time.sleep(3600)
+            new_events = app.parse()
+        
+            if len(new_events) > 0:
+                body = "The following hackathons have been recently posted:<br><br><ul>"
+                for event in new_events:
+                    body = body + "<li><a href='" + event[3] + "'><b>" + event[0] + "</b></a> in " + event[2] + " on " + event[1] + "</li>"
+                body = body + "</ul>"
+        
+                sendEmail(body)
+            # else:
+                # print("Everything is Up to Date")
+            
+            deletePYCFiles()
+            time.sleep(3600)
 
 
 application = App()
